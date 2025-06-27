@@ -79,7 +79,7 @@ export const App = () => {
                     - Click to select anime you have watchedanime
                   </span>
                   <span className="ml-2 text-zinc-400 font-medium">
-                    sedai-10032.darkhole.space
+                    darkhole1.github.io/sedai-10032
                   </span>
                 </h1>
                 <span className="shrink-0 whitespace-nowrap">
