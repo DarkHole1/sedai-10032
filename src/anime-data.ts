@@ -1713,22 +1713,6 @@ export const animeData = {
       "nsfw": "white"
     },
     {
-      "id": 4752,
-      "title": "Vampire Knight Guilty",
-      "main_picture": {
-        "medium": "https://cdn.myanimelist.net/images/anime/3/10075.webp",
-        "large": "https://cdn.myanimelist.net/images/anime/3/10075l.webp"
-      },
-      "start_date": "2008-10-07",
-      "num_list_users": 377882,
-      "media_type": "tv",
-      "start_season": {
-        "year": 2008,
-        "season": "fall"
-      },
-      "nsfw": "white"
-    },
-    {
       "id": 4975,
       "title": "ChäoS;HEAd",
       "main_picture": {
@@ -1741,6 +1725,22 @@ export const animeData = {
       "start_season": {
         "year": 2008,
         "season": "fall"
+      },
+      "nsfw": "white"
+    },
+    {
+      "id": 3731,
+      "title": "Itazura na Kiss",
+      "main_picture": {
+        "medium": "https://cdn.myanimelist.net/images/anime/10/19933.webp",
+        "large": "https://cdn.myanimelist.net/images/anime/10/19933l.webp"
+      },
+      "start_date": "2008-04-05",
+      "num_list_users": 292456,
+      "media_type": "tv",
+      "start_season": {
+        "year": 2008,
+        "season": "spring"
       },
       "nsfw": "white"
     }
@@ -1923,18 +1923,18 @@ export const animeData = {
       "nsfw": "white"
     },
     {
-      "id": 5300,
-      "title": "Zoku Natsume Yuujinchou",
+      "id": 6682,
+      "title": "11eyes",
       "main_picture": {
-        "medium": "https://cdn.myanimelist.net/images/anime/4/79738.jpg",
-        "large": "https://cdn.myanimelist.net/images/anime/4/79738l.jpg"
+        "medium": "https://cdn.myanimelist.net/images/anime/6/73520.webp",
+        "large": "https://cdn.myanimelist.net/images/anime/6/73520l.webp"
       },
-      "start_date": "2009-01-06",
-      "num_list_users": 260627,
+      "start_date": "2009-10-07",
+      "num_list_users": 243646,
       "media_type": "tv",
       "start_season": {
         "year": 2009,
-        "season": "winter"
+        "season": "fall"
       },
       "nsfw": "white"
     }
@@ -4429,22 +4429,6 @@ export const animeData = {
       "nsfw": "white"
     },
     {
-      "id": 48413,
-      "title": "Hataraku Maou-sama!!",
-      "main_picture": {
-        "medium": "https://cdn.myanimelist.net/images/anime/1502/124354.webp",
-        "large": "https://cdn.myanimelist.net/images/anime/1502/124354l.webp"
-      },
-      "start_date": "2022-07-14",
-      "num_list_users": 508496,
-      "media_type": "tv",
-      "start_season": {
-        "year": 2022,
-        "season": "summer"
-      },
-      "nsfw": "white"
-    },
-    {
       "id": 50273,
       "title": "Tomodachi Game",
       "main_picture": {
@@ -4457,6 +4441,22 @@ export const animeData = {
       "start_season": {
         "year": 2022,
         "season": "spring"
+      },
+      "nsfw": "white"
+    },
+    {
+      "id": 49220,
+      "title": "Isekai Ojisan",
+      "main_picture": {
+        "medium": "https://cdn.myanimelist.net/images/anime/1743/125204.jpg",
+        "large": "https://cdn.myanimelist.net/images/anime/1743/125204l.jpg"
+      },
+      "start_date": "2022-07-06",
+      "num_list_users": 400360,
+      "media_type": "tv",
+      "start_season": {
+        "year": 2022,
+        "season": "summer"
       },
       "nsfw": "white"
     }
@@ -4849,6 +4849,6 @@ export const animeData = {
       "nsfw": "white"
     }
   ]
-}
+} 
 
 export const getAnimeTitle = (item: { title: string }) => item.title
