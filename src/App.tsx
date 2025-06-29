@@ -1,17 +1,24 @@
 import { useRef } from "react";
-import { animeData, getAnimeTitle } from "./anime-data";
+import { malAnimeData, getAnimeTitle, alAnimeData } from "./anime-data";
 import { domToBlob } from "modern-screenshot";
 import { toast } from "sonner";
 import { useLocalStorage } from "usehooks-ts";
 
 export const App = () => {
-  const [selectedAnime, setSelectedAnime] = useLocalStorage<string[]>(
-    "selectedAnime",
+  const [selectedAnime, setSelectedAnime] = useLocalStorage<number[]>(
+    "selectedAnimeIds",
     []
+  );
+
+  const [dataSource, setDataSource] = useLocalStorage<"mal" | "anilist">(
+    "dataSource",
+    "mal"
   );
 
   const wrapper = useRef<HTMLDivElement>(null);
   const language = "en";
+
+  const animeData = dataSource === "anilist" ? alAnimeData : malAnimeData;
 
   const imageToBlob = async () => {
     if (!wrapper.current) return;
@@ -59,13 +66,38 @@ export const App = () => {
   };
 
   const totalAnime = Object.values(animeData).flatMap((year) => {
-    return year.map((item) => getAnimeTitle(item)).slice(0, 12);
+    return year.map((item) => item.id).slice(0, 12);
   }).length;
 
   return (
     <>
       <div className="flex flex-col gap-4 pb-10">
         <div className="p-4 flex flex-col md:items-center">
+          <div className="flex justify-end mb-4">
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-600">Source of data:</span>
+              <button
+                className={`px-3 py-1 text-sm rounded transition-colors ${
+                  dataSource === "mal"
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                }`}
+                onClick={() => setDataSource("mal")}
+              >
+                MyAnimeList
+              </button>
+              <button
+                className={`px-3 py-1 text-sm rounded transition-colors ${
+                  dataSource === "anilist"
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                }`}
+                onClick={() => setDataSource("anilist")}
+              >
+                AniList
+              </button>
+            </div>
+          </div>
           <div className="w-full overflow-x-auto">
             <div
               className="flex flex-col border border-b-0 bg-white w-fit mx-auto"
@@ -101,7 +133,7 @@ export const App = () => {
                     </div>
                     <div className="flex shrink-0">
                       {items.slice(0, 12).map((item) => {
-                        const animeKey = getAnimeTitle(item);
+                        const animeKey = item.id;
                         const displayTitle = getAnimeTitle(item);
                         const isSelected = selectedAnime.includes(animeKey);
                         return (
@@ -177,7 +209,7 @@ export const App = () => {
             onClick={() => {
               setSelectedAnime(
                 Object.values(animeData).flatMap((year) => {
-                  return year.map((item) => getAnimeTitle(item)).slice(0, 12);
+                  return year.map((item) => item.id).slice(0, 12);
                 })
               );
             }}
