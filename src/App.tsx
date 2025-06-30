@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { malAnimeData, getAnimeTitle, alAnimeData } from "./anime-data";
+import { malAnimeData, getAnimeTitle, alAnimeData, alIds, malIds } from "./anime-data";
 import { domToBlob } from "modern-screenshot";
 import { toast } from "sonner";
 import { useLocalStorage } from "usehooks-ts";
@@ -19,6 +19,7 @@ export const App = () => {
   const language = "en";
 
   const animeData = dataSource === "anilist" ? alAnimeData : malAnimeData;
+  const ids = dataSource === "anilist" ? alIds : malIds;
 
   const imageToBlob = async () => {
     if (!wrapper.current) return;
@@ -68,6 +69,7 @@ export const App = () => {
   const totalAnime = Object.values(animeData).flatMap((year) => {
     return year.map((item) => item.id).slice(0, 12);
   }).length;
+  const selectedAnimeSize = selectedAnime.filter(anime => ids.has(anime)).length;
 
   return (
     <>
@@ -115,7 +117,7 @@ export const App = () => {
                   </span>
                 </h1>
                 <span className="shrink-0 whitespace-nowrap">
-                  I have watched {selectedAnime.length}/{totalAnime} anime
+                  I have watched {selectedAnimeSize}/{totalAnime} anime
                 </span>
               </div>
               {Object.keys(animeData).map((year) => {

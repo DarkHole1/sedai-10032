@@ -3704,4 +3704,7 @@ export const alAnimeData = {
   ]
 }
 
+export const malIds = new Set(Object.values(malAnimeData).flat().map(data => data.id))
+export const alIds = new Set(Object.values(alAnimeData).flat().map(data => data.id))
+
 export const getAnimeTitle = (item: { title: string }) => item.title
