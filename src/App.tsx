@@ -1,5 +1,11 @@
 import { useRef } from "react";
-import { malAnimeData, getAnimeTitle, alAnimeData, alIds, malIds } from "./anime-data";
+import {
+  malAnimeData,
+  getAnimeTitle,
+  alAnimeData,
+  alIds,
+  malIds,
+} from "./anime-data";
 import { domToBlob } from "modern-screenshot";
 import { toast } from "sonner";
 import { useLocalStorage } from "usehooks-ts";
@@ -13,6 +19,11 @@ export const App = () => {
   const [dataSource, setDataSource] = useLocalStorage<"mal" | "anilist">(
     "dataSource",
     "mal"
+  );
+
+  const [lang, setLang] = useLocalStorage<"romaji" | "russian">(
+    "lang",
+    "romaji"
   );
 
   const wrapper = useRef<HTMLDivElement>(null);
@@ -69,13 +80,15 @@ export const App = () => {
   const totalAnime = Object.values(animeData).flatMap((year) => {
     return year.map((item) => item.id).slice(0, 12);
   }).length;
-  const selectedAnimeSize = selectedAnime.filter(anime => ids.has(anime)).length;
+  const selectedAnimeSize = selectedAnime.filter((anime) =>
+    ids.has(anime)
+  ).length;
 
   return (
     <>
       <div className="flex flex-col gap-4 pb-10">
         <div className="p-4 flex flex-col md:items-center">
-          <div className="flex justify-end mb-4">
+          <div className="flex justify-end mb-4 gap-4">
             <div className="flex items-center gap-2">
               <span className="text-sm text-gray-600">Source of data:</span>
               <button
@@ -97,6 +110,29 @@ export const App = () => {
                 onClick={() => setDataSource("anilist")}
               >
                 AniList
+              </button>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-600">Title language:</span>
+              <button
+                className={`px-3 py-1 text-sm rounded transition-colors ${
+                  lang === "romaji"
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                }`}
+                onClick={() => setLang("romaji")}
+              >
+                Romaji
+              </button>
+              <button
+                className={`px-3 py-1 text-sm rounded transition-colors ${
+                  lang === "russian"
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                }`}
+                onClick={() => setLang("russian")}
+              >
+                Russian
               </button>
             </div>
           </div>
@@ -136,7 +172,7 @@ export const App = () => {
                     <div className="flex shrink-0">
                       {items.slice(0, 12).map((item) => {
                         const animeKey = item.id;
-                        const displayTitle = getAnimeTitle(item);
+                        const displayTitle = getAnimeTitle(item, lang);
                         const isSelected = selectedAnime.includes(animeKey);
                         return (
                           <button
